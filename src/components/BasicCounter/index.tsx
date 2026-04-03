@@ -1,19 +1,16 @@
-import { CounterContext } from "@/contexts/CounterContext";
-import { useContext } from "react";
+import { useCounterStore } from "@/stores/counterStore";
 export const BasicCounter = () => {
-  const { basic, basicDispatch } = useContext(CounterContext);
+  const { basicCount, basicIncrement, basicDecrement, basicReset } =
+    useCounterStore();
   return (
     <>
       <h2>基本カウンター</h2>
-      <p>現在の値: {basic.count}</p>
-      <button onClick={() => basicDispatch({ type: "INCREMENT" })}>+1</button>
-      <button
-        onClick={() => basicDispatch({ type: "DECREMENT" })}
-        disabled={basic.count <= 0}
-      >
+      <p>現在の値: {basicCount}</p>
+      <button onClick={basicIncrement}>+1</button>
+      <button onClick={basicDecrement} disabled={basicCount <= 0}>
         -1
       </button>
-      <button onClick={() => basicDispatch({ type: "RESET" })}>リセット</button>
+      <button onClick={basicReset}>リセット</button>
     </>
   );
 };
